@@ -5,16 +5,19 @@ import (
 	"sort"
 
 	"github.com/gorilla/mux"
+	watchdog "github.com/znkisoft/watchdog/schema"
+	"google.golang.org/protobuf/proto"
 )
 
 type httpMethod string
 
-type RouterMap map[string]map[httpMethod]http.HandlerFunc
+type RouterMap map[string]map[httpMethod]ProtoHandlerFunc
 
 var routerMap = RouterMap{
 	"/hello": {
-		http.MethodGet: func(w http.ResponseWriter, r *http.Request) {
-			w.Write([]byte("Hello World!"))
+		http.MethodGet: func(w http.ResponseWriter, r *http.Request) (proto.Message, error) {
+			p := &watchdog.Ping{Message: "pong"}
+			return p, nil
 		},
 	},
 }

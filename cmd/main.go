@@ -16,7 +16,9 @@ func main() {
 		port = p
 	}
 
-	routers := server.NewRouter([]mux.MiddlewareFunc{})
+	routers := server.NewRouter([]mux.MiddlewareFunc{
+		server.LogMiddleware,
+	})
 	srv := &http.Server{
 		Handler: routers,
 		Addr:    host + ":" + port,
