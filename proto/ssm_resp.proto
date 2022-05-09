@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option go_package = "github.com/znkisoft/watchdog";
+
+import "google/protobuf/timestamp.proto";
+import "ssm.proto";
+
+
+message PluginRequest {
+  PluginType type = 1;
+}
+
+message PluginResponse {
+  oneof PluginInfo {
+    UptimeInfo uptime_info = 1;
+    SysTimeInfo sys_time_info = 2;
+  }
+}
+
+message PluginListResponse {
+  repeated string plugins = 1;
+}

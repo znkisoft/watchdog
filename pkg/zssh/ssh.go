@@ -1,4 +1,4 @@
-package xssh
+package zssh
 
 import (
 	"bytes"
@@ -9,7 +9,7 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
-type xssh struct {
+type zssh struct {
 }
 
 var host string
