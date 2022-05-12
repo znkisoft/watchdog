@@ -6,7 +6,24 @@ message Ping {
   string message = 1;
 }
 
+// pagination params for request
 message Pagination {
   int32 page_size = 1;
   int32 page_number = 2;
+}
+
+// target server info
+message ServerInfo {
+  string name = 1;
+  string ip = 2;
+  string port = 3;
+  string protocol = 4;
+  int32 check_interval = 5;
+  int32 timeout = 6;
+}
+
+enum ServerStatus {
+  SERVER_STATUS_UNKNOWN = 0;
+  UP = 1;
+  DOWN = 2;
 }

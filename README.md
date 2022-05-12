@@ -23,8 +23,19 @@
 <details>
     <summary>plugin list</summary>
 
-- uptime
-- 
+- [ ] Ping
+- [ ] Uptime
+- [ ] CPU
+- [ ] Memory
+- [ ] Load
+- [ ] Process list
+- [ ] Network interface
+- [ ] Disk I/O
+- [ ] IRQ / Raid
+- [ ] Sensors
+- [ ] Filesystem(and folders)
+- [ ] Monitor
+- [ ] Alert
 </details>
 
 ## Credits:

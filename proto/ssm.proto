@@ -13,7 +13,7 @@ message SysTimeInfo {
 }
 
 enum PluginType {
-  UNKNOWN = 0;
+  PLUGIN_TYPE_UNKNOWN = 0;
   UPTIME = 1;
   MEMORY = 2;
   CPU = 3;
