@@ -15,6 +15,7 @@ type Ping interface {
 
 type ping struct{}
 
+// Ping TODO
 func (p *ping) Ping(hostIP string) (bool, error) {
 	c, err := icmp.ListenPacket("ip4:icmp", "0.0.0.0")
 	if err != nil {
