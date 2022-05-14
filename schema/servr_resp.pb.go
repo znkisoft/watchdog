@@ -123,6 +123,180 @@ func (x *ServerStatusResponse) GetLastUpdated() *timestamppb.Timestamp {
 	return nil
 }
 
+type PluginRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Type PluginType `protobuf:"varint,1,opt,name=type,proto3,enum=PluginType" json:"type,omitempty"`
+}
+
+func (x *PluginRequest) Reset() {
+	*x = PluginRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_servr_resp_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PluginRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PluginRequest) ProtoMessage() {}
+
+func (x *PluginRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_servr_resp_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PluginRequest.ProtoReflect.Descriptor instead.
+func (*PluginRequest) Descriptor() ([]byte, []int) {
+	return file_servr_resp_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *PluginRequest) GetType() PluginType {
+	if x != nil {
+		return x.Type
+	}
+	return PluginType_PLUGIN_TYPE_UNKNOWN
+}
+
+type PluginResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Types that are assignable to PluginInfo:
+	//	*PluginResponse_UptimeInfo
+	//	*PluginResponse_SysTimeInfo
+	PluginInfo isPluginResponse_PluginInfo `protobuf_oneof:"PluginInfo"`
+}
+
+func (x *PluginResponse) Reset() {
+	*x = PluginResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_servr_resp_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PluginResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PluginResponse) ProtoMessage() {}
+
+func (x *PluginResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_servr_resp_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PluginResponse.ProtoReflect.Descriptor instead.
+func (*PluginResponse) Descriptor() ([]byte, []int) {
+	return file_servr_resp_proto_rawDescGZIP(), []int{3}
+}
+
+func (m *PluginResponse) GetPluginInfo() isPluginResponse_PluginInfo {
+	if m != nil {
+		return m.PluginInfo
+	}
+	return nil
+}
+
+func (x *PluginResponse) GetUptimeInfo() *UptimeInfo {
+	if x, ok := x.GetPluginInfo().(*PluginResponse_UptimeInfo); ok {
+		return x.UptimeInfo
+	}
+	return nil
+}
+
+func (x *PluginResponse) GetSysTimeInfo() *SysTimeInfo {
+	if x, ok := x.GetPluginInfo().(*PluginResponse_SysTimeInfo); ok {
+		return x.SysTimeInfo
+	}
+	return nil
+}
+
+type isPluginResponse_PluginInfo interface {
+	isPluginResponse_PluginInfo()
+}
+
+type PluginResponse_UptimeInfo struct {
+	UptimeInfo *UptimeInfo `protobuf:"bytes,1,opt,name=uptime_info,json=uptimeInfo,proto3,oneof"`
+}
+
+type PluginResponse_SysTimeInfo struct {
+	SysTimeInfo *SysTimeInfo `protobuf:"bytes,2,opt,name=sys_time_info,json=sysTimeInfo,proto3,oneof"`
+}
+
+func (*PluginResponse_UptimeInfo) isPluginResponse_PluginInfo() {}
+
+func (*PluginResponse_SysTimeInfo) isPluginResponse_PluginInfo() {}
+
+type PluginListResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Plugins []string `protobuf:"bytes,1,rep,name=plugins,proto3" json:"plugins,omitempty"`
+}
+
+func (x *PluginListResponse) Reset() {
+	*x = PluginListResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_servr_resp_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PluginListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PluginListResponse) ProtoMessage() {}
+
+func (x *PluginListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_servr_resp_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PluginListResponse.ProtoReflect.Descriptor instead.
+func (*PluginListResponse) Descriptor() ([]byte, []int) {
+	return file_servr_resp_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *PluginListResponse) GetPlugins() []string {
+	if x != nil {
+		return x.Plugins
+	}
+	return nil
+}
+
 var File_servr_resp_proto protoreflect.FileDescriptor
 
 var file_servr_resp_proto_rawDesc = []byte{
@@ -141,9 +315,24 @@ var file_servr_resp_proto_rawDesc = []byte{
 	0x61, 0x74, 0x65, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f,
 	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d,
 	0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x0b, 0x6c, 0x61, 0x73, 0x74, 0x55, 0x70, 0x64, 0x61,
-	0x74, 0x65, 0x64, 0x42, 0x1e, 0x5a, 0x1c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
-	0x6d, 0x2f, 0x7a, 0x6e, 0x6b, 0x69, 0x73, 0x6f, 0x66, 0x74, 0x2f, 0x77, 0x61, 0x74, 0x63, 0x68,
-	0x64, 0x6f, 0x67, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x65, 0x64, 0x22, 0x30, 0x0a, 0x0d, 0x50, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x1f, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x0e, 0x32, 0x0b, 0x2e, 0x50, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x52,
+	0x04, 0x74, 0x79, 0x70, 0x65, 0x22, 0x82, 0x01, 0x0a, 0x0e, 0x50, 0x6c, 0x75, 0x67, 0x69, 0x6e,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2e, 0x0a, 0x0b, 0x75, 0x70, 0x74, 0x69,
+	0x6d, 0x65, 0x5f, 0x69, 0x6e, 0x66, 0x6f, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0b, 0x2e,
+	0x55, 0x70, 0x74, 0x69, 0x6d, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x48, 0x00, 0x52, 0x0a, 0x75, 0x70,
+	0x74, 0x69, 0x6d, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x32, 0x0a, 0x0d, 0x73, 0x79, 0x73, 0x5f,
+	0x74, 0x69, 0x6d, 0x65, 0x5f, 0x69, 0x6e, 0x66, 0x6f, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x0c, 0x2e, 0x53, 0x79, 0x73, 0x54, 0x69, 0x6d, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x48, 0x00, 0x52,
+	0x0b, 0x73, 0x79, 0x73, 0x54, 0x69, 0x6d, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x42, 0x0c, 0x0a, 0x0a,
+	0x50, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x49, 0x6e, 0x66, 0x6f, 0x22, 0x2e, 0x0a, 0x12, 0x50, 0x6c,
+	0x75, 0x67, 0x69, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x18, 0x0a, 0x07, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x09, 0x52, 0x07, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x73, 0x42, 0x1e, 0x5a, 0x1c, 0x67, 0x69,
+	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x7a, 0x6e, 0x6b, 0x69, 0x73, 0x6f, 0x66,
+	0x74, 0x2f, 0x77, 0x61, 0x74, 0x63, 0x68, 0x64, 0x6f, 0x67, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -158,21 +347,30 @@ func file_servr_resp_proto_rawDescGZIP() []byte {
 	return file_servr_resp_proto_rawDescData
 }
 
-var file_servr_resp_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_servr_resp_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_servr_resp_proto_goTypes = []interface{}{
 	(*ServerStatusRequest)(nil),   // 0: ServerStatusRequest
 	(*ServerStatusResponse)(nil),  // 1: ServerStatusResponse
-	(ServerStatus)(0),             // 2: ServerStatus
-	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
+	(*PluginRequest)(nil),         // 2: PluginRequest
+	(*PluginResponse)(nil),        // 3: PluginResponse
+	(*PluginListResponse)(nil),    // 4: PluginListResponse
+	(ServerStatus)(0),             // 5: ServerStatus
+	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
+	(PluginType)(0),               // 7: PluginType
+	(*UptimeInfo)(nil),            // 8: UptimeInfo
+	(*SysTimeInfo)(nil),           // 9: SysTimeInfo
 }
 var file_servr_resp_proto_depIdxs = []int32{
-	2, // 0: ServerStatusResponse.status:type_name -> ServerStatus
-	3, // 1: ServerStatusResponse.last_updated:type_name -> google.protobuf.Timestamp
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	5, // 0: ServerStatusResponse.status:type_name -> ServerStatus
+	6, // 1: ServerStatusResponse.last_updated:type_name -> google.protobuf.Timestamp
+	7, // 2: PluginRequest.type:type_name -> PluginType
+	8, // 3: PluginResponse.uptime_info:type_name -> UptimeInfo
+	9, // 4: PluginResponse.sys_time_info:type_name -> SysTimeInfo
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_servr_resp_proto_init() }
@@ -206,6 +404,46 @@ func file_servr_resp_proto_init() {
 				return nil
 			}
 		}
+		file_servr_resp_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PluginRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_servr_resp_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PluginResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_servr_resp_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PluginListResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+	}
+	file_servr_resp_proto_msgTypes[3].OneofWrappers = []interface{}{
+		(*PluginResponse_UptimeInfo)(nil),
+		(*PluginResponse_SysTimeInfo)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -213,7 +451,7 @@ func file_servr_resp_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_servr_resp_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
