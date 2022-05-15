@@ -20,6 +20,9 @@ var routerMap = RouterMap{
 			return p, nil
 		},
 	},
+	"/uptime": {
+		http.MethodPost: Uptime,
+	},
 }
 
 func NewRouter(mws []mux.MiddlewareFunc) *mux.Router {

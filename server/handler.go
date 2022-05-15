@@ -1,6 +1,7 @@
 package server
 
 import (
+	"log"
 	"net/http"
 
 	"google.golang.org/grpc/status"
@@ -8,12 +9,6 @@ import (
 )
 
 type ProtoHandlerFunc func(http.ResponseWriter, *http.Request) (proto.Message, error)
-
-const (
-	HeaderContentType = "Content-Type"
-
-	MimeApplicationXProtobuf = "application/x-protobuf"
-)
 
 func (fn ProtoHandlerFunc) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	_ = r.Context()
@@ -39,6 +34,9 @@ func (fn ProtoHandlerFunc) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if m == nil {
 		return
 	}
+
+	// debug only
+	log.Printf("[DEBUG] response from %s: %v", r.URL.String(), m)
 
 	w.Header().Set(HeaderContentType, MimeApplicationXProtobuf)
 	protoBytes, err := proto.Marshal(m)
