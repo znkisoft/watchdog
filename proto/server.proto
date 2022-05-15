@@ -1,14 +1,8 @@
 syntax = "proto3";
 
-option go_package = "github.com/znkisoft/watchdog";
+option go_package = "github.com/znkisoft/watchdog/schema";
 
 import "google/protobuf/timestamp.proto";
-
-enum ServerStatus {
-  SERVER_STATUS_UNKNOWN = 0;
-  UP = 1;
-  DOWN = 2;
-}
 
 enum PluginType {
   PLUGIN_TYPE_UNKNOWN = 0;
@@ -24,7 +18,6 @@ message Ping {
   string message = 1;
 }
 
-// target server info
 message ServerInfo {
   string name = 1;
   string ip = 2;

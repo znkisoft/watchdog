@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/znkisoft/watchdog";
+option go_package = "github.com/znkisoft/watchdog/schema";
 
 import "server.proto";
 import "google/protobuf/timestamp.proto";
@@ -10,7 +10,12 @@ message ServerStatusRequest {
 }
 
 message ServerStatusResponse {
-  ServerStatus status = 1;
+  enum Status {
+    SERVER_STATUS_UNKNOWN = 0;
+    UP = 1;
+    DOWN = 2;
+  }
+  Status status = 1;
   google.protobuf.Timestamp last_updated = 2;
 }
 
