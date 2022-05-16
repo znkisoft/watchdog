@@ -3,6 +3,7 @@ package server
 import (
 	"net/http"
 
+	"github.com/znkisoft/watchdog/pkg/ssm"
 	"github.com/znkisoft/watchdog/schema"
 	"google.golang.org/protobuf/proto"
 )
@@ -13,14 +14,15 @@ func Uptime(_ http.ResponseWriter, r *http.Request) (proto.Message, error) {
 		return nil, err
 	}
 
-	if req.Type != schema.PluginType_UPTIME {
-		return nil, nil
+	data, err := ssm.Uptime()
+	if err != nil {
+		return nil, err
 	}
 
 	return &schema.PluginResponse{
 		PluginInfo: &schema.PluginResponse_UptimeInfo{
 			UptimeInfo: &schema.UptimeInfo{
-				Seconds: 12313,
+				Seconds: int32(data),
 			},
 		},
 	}, nil

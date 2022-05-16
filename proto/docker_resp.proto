@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+option go_package = "github.com/znkisoft/watchdog/schema";
+
+message ListContainersRequest {
+  bool all = 1;
+  int32 limit = 2;
+  bool size = 3;
+  string filters = 4;
+}
+
+message ListContainersResponse {
+
+}
+
+message CreateContainerRequest {
+
+}
+
+message CreateContainerResponse {
+
+}
+
+message StartContainerRequest {
+
+}
+
+message StartContainerResponse {
+
+}
+
+message StopContainerRequest {
+
+}
+
+message StopContainerResponse {
+
+}
+
+message RestartContainerRequest {
+
+}
+
+message RestartContainerResponse {
+
+}
+
+message RemoveContainerRequest {
+
+}
+
+message RemoveContainerResponse {
+
+}
+
+message KillContainerRequest {
+
+}
+
+message KillContainerResponse {
+
+}
+
+// PruneContainerRequest is the request to delete a container which is not running.
+message PruneContainerRequest {
+
+}
+
+// PruneContainerResponse is the response to delete a container which is not running.
+message PruneContainerResponse {
+  
+}

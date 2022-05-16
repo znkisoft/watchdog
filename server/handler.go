@@ -21,7 +21,7 @@ func (fn ProtoHandlerFunc) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 		s, ok := status.FromError(err)
 		if !ok {
-			http.Error(w, "internal error", http.StatusInternalServerError)
+			http.Error(w, "[internal error]: "+s.Err().Error(), http.StatusInternalServerError)
 			return
 		}
 
