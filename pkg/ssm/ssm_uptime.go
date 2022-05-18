@@ -12,15 +12,11 @@ type IUptime interface {
 func Uptime() (int, error) {
 	cmd := exec.Command("uptime")
 
-	if err := cmd.Run(); err != nil {
-		return 0, err
-	}
-	defer cmd.Process.Kill()
-
 	data, err := cmd.Output()
 	if err != nil {
 		return 0, err
 	}
+	defer cmd.Process.Kill()
 
 	log.Printf("%s", data)
 	return 1, nil
