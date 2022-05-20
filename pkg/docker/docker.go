@@ -9,7 +9,6 @@ import (
 )
 
 type API interface {
-	Ping(host string) (bool, error)
 	ContainerList(ctx context.Context, options types.ContainerListOptions) ([]types.Container, error)
 	ContainerCreate(ctx context.Context, config *ContainerConfig, hostConfig *HostConfig, networkingConfig *NetworkingConfig, containerName string) (ContainerCreateCreatedBody, error)
 	ContainerRemove(ctx context.Context, container string, options types.ContainerRemoveOptions) error
@@ -45,11 +44,6 @@ type API interface {
 }
 
 type Client struct {
-}
-
-func (c Client) Ping(host string) (bool, error) {
-	// TODO implement me
-	panic("implement me")
 }
 
 func (c Client) ContainerList(ctx context.Context, options types.ContainerListOptions) ([]types.Container, error) {

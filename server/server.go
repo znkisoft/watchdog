@@ -28,7 +28,6 @@ const (
 )
 
 func (s *Server) Start(ctx context.Context) error {
-	// initialize the routes and middleware
 	routers := NewRouter([]mux.MiddlewareFunc{
 		LogMiddleware,
 	})
