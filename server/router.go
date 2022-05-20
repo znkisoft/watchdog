@@ -64,5 +64,7 @@ func NewRouter(mws []mux.MiddlewareFunc) *mux.Router {
 			api.Path(pt).Methods(string(m)).Handler(hm)
 		}
 	}
+
+	api.Path("/ws").HandlerFunc(WebSocketHandler)
 	return r
 }
