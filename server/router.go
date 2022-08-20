@@ -14,9 +14,9 @@ type httpMethod string
 type RouterMap map[string]map[httpMethod]ProtoHandlerFunc
 
 var routerMap = RouterMap{
-	"/hello": {
+	"/health": {
 		http.MethodGet: func(w http.ResponseWriter, r *http.Request) (proto.Message, error) {
-			p := &watchdog.Ping{Message: "pong"}
+			p := &watchdog.Ping{Message: "watchdog service is fine."}
 			return p, nil
 		},
 	},
@@ -27,7 +27,7 @@ var routerMap = RouterMap{
 
 func NewRouter(mws []mux.MiddlewareFunc) *mux.Router {
 	r := mux.NewRouter()
-	api := r.PathPrefix("/api/").Subrouter()
+	api := r.PathPrefix("/api").Subrouter()
 
 	api.Methods(http.MethodOptions).Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {}))
 	api.Use(mws...)

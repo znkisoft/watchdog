@@ -33,7 +33,7 @@ func (s *Server) Start(ctx context.Context) error {
 		LogMiddleware,
 	})
 
-	s.BindAddress = ":8080"
+	s.BindAddress = ":3020"
 	s.ShutdownCtx = ctx
 	s.Monitor = ssm.RegisterMonitor()
 
