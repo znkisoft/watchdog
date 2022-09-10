@@ -15,9 +15,9 @@ type ProtoRouterMap map[string]map[httpMethod]ProtoHandlerFunc
 type JSONRouterMap map[string]map[httpMethod]JSONHandlerFunc
 
 var protoRouterMap = ProtoRouterMap{
-	"/hello": {
+	"/health": {
 		http.MethodGet: func(w http.ResponseWriter, r *http.Request) (proto.Message, error) {
-			p := &watchdog.Ping{Message: "pong"}
+			p := &watchdog.Ping{Message: "watchdog service is fine."}
 			return p, nil
 		},
 	},
@@ -35,7 +35,7 @@ var jsonRouterMap = JSONRouterMap{
 
 func NewRouter(mws []mux.MiddlewareFunc) *mux.Router {
 	r := mux.NewRouter()
-	api := r.PathPrefix("/api/").Subrouter()
+	api := r.PathPrefix("/api").Subrouter()
 
 	api.Methods(http.MethodOptions).Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {}))
 	api.Use(mws...)

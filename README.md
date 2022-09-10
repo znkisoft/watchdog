@@ -1,19 +1,21 @@
 # watchdog
 
 ## package info
+
 - `exec`: execute commands
 - `zfs`: file system
 - `zssh`: ssh interface
 - `ssm`: server status monitor
 
-### SSM
+## REST APIs
 
-- [ ] self-monitoring
-- [ ] check other servers using ssh
+### Userver
 
-
-
-## REST API
+- `GET /api/v1/userver`: get all userver
+- `GET /api/v1/userver/:id`: get userver by id
+- `POST /api/v1/userver`: create userver
+- `PUT /api/v1/userver/:id`: update userver
+- `DELETE /api/v1/userver/:id`: delete userver
 
 ### SSM
 
@@ -36,8 +38,11 @@
 - [ ] Filesystem(and folders)
 - [ ] Monitor
 - [ ] Alert
+
 </details>
 
 ## Credits:
+
 - [glances](https://github.com/nicolargo/glances)
+- [pocketbase](https://github.com/pocketbase/pocketbase)
 - [gossm](https://github.com/ssimunic/gossm)

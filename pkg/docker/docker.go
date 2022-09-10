@@ -8,6 +8,14 @@ import (
 	"github.com/docker/docker/api/types/filters"
 )
 
+type ContainerConfig any
+
+type HostConfig any
+
+type NetworkingConfig any
+
+type ContainerCreateCreatedBody any
+
 type API interface {
 	ContainerList(ctx context.Context, options types.ContainerListOptions) ([]types.Container, error)
 	ContainerCreate(ctx context.Context, config *ContainerConfig, hostConfig *HostConfig, networkingConfig *NetworkingConfig, containerName string) (ContainerCreateCreatedBody, error)

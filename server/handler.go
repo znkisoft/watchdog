@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -40,14 +41,19 @@ func (fn ProtoHandlerFunc) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// debug only
 	log.Printf("[DEBUG] response from %s: %v", r.URL.String(), m)
 
-	w.Header().Set(HeaderContentType, MimeApplicationXProtobuf)
-	protoBytes, err := proto.Marshal(m)
+	// TODO add different content type to marshal
+
+	// w.Header().Set(HeaderContentType, MimeApplicationXProtobuf)
+	w.Header().Set(HeaderContentType, MimeApplicationJSON)
+
+	jsonBytes, err := protojson.Marshal(m)
+	// protoBytes, err := proto.Marshal(m)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	if _, err := w.Write(protoBytes); err != nil {
+	if _, err := w.Write(jsonBytes); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }

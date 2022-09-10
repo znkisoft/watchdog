@@ -18,13 +18,15 @@ message Ping {
   string message = 1;
 }
 
-message ServerInfo {
-  string name = 1;
-  string ip = 2;
-  string port = 3;
-  string protocol = 4;
-  int32 check_interval = 5;
-  int32 timeout = 6;
+message Userver {
+  // TODO set primary key with option field
+  string id = 1;
+  string name = 2;
+  string ip = 3;
+  string port = 4;
+  string protocol = 5;
+  int32 check_interval = 6;
+  int32 timeout = 7;
 }
 
 message UptimeInfo {
@@ -34,3 +36,4 @@ message UptimeInfo {
 message SysTimeInfo {
   google.protobuf.Timestamp time = 1;
 }
+
