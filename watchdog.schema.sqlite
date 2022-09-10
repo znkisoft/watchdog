@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS Userver ( id TEXT PRIMARY KEY, name TEXT, ip TEXT, port TEXT, protocol TEXT, check_interval INTEGER, timeout INTEGER);
