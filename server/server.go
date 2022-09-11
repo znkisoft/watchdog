@@ -3,7 +3,7 @@ package server
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"time"
@@ -29,7 +29,8 @@ const (
 
 func (s *Server) Start(ctx context.Context) error {
 	routers := NewRouter([]mux.MiddlewareFunc{
-		LogMiddleware,
+		RequestLogMiddleware,
+		ContextMiddleware,
 	})
 
 	s.BindAddress = ":3020"
@@ -62,17 +63,16 @@ func UnmarshalReq(r *http.Request, req proto.Message) error {
 }
 
 func unmarshalJSON(r *http.Request, req proto.Message) error {
-	body, err := ioutil.ReadAll(r.Body)
+	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		return err
 	}
 	// log.Infof(r.Context(), "request body: %v", string(body))
-
 	return protojson.UnmarshalOptions{DiscardUnknown: true}.Unmarshal(body, req)
 }
 
 func unmarshalProto(r *http.Request, req proto.Message) error {
-	body, err := ioutil.ReadAll(r.Body)
+	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		return err
 	}

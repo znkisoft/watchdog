@@ -4,6 +4,11 @@ option go_package = "github.com/znkisoft/watchdog/schema";
 
 import "models.proto";
 
+message Pagination {
+  int32 skip = 1;
+  int32 limit = 2;
+}
+
 message ServerStatusRequest {
   string server_id = 1;
 }
