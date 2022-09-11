@@ -5,33 +5,16 @@ import (
 	"net/http"
 
 	"github.com/docker/docker/api/types"
-	"github.com/znkisoft/watchdog/schema"
 )
 
 func ContainerList(_ http.ResponseWriter, r *http.Request) (any, error) {
-	req := &schema.ListContainersRequest{}
-
-	// 	types.ContainerListOptions{
-	// 	Quiet:   false,
-	// 	Size:    false,
-	// 	All:     false,
-	// 	Latest:  false,
-	// 	Since:   "",
-	// 	Before:  "",
-	// 	Limit:   0,
-	// 	Filters: filters.Args{},
-	// }
-
-	if err := UnmarshalReq(r, req); err != nil {
-		return nil, err
-	}
 
 	arr := make([]*types.Container, 0)
 	arr = append(arr, &types.Container{
 		Names: []string{"test"},
 	})
 
-	return arr, nil
+	return nil, nil
 }
 
 func ContainerCreate(_ http.ResponseWriter, r *http.Request) (any, error) {

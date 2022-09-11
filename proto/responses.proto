@@ -25,3 +25,8 @@ message PluginResponse {
 message PluginListResponse {
   repeated string plugins = 1;
 }
+
+
+message UserverResponse {
+  repeated Userver uservers = 1;
+}

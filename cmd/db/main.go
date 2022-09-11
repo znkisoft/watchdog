@@ -9,7 +9,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-const fileName = "watchdog.schema.sqlite"
+const fileName = "watchdog.schema.sql"
 
 func main() {
 	targetDir := os.Args[1]

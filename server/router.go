@@ -22,6 +22,14 @@ var pbRouterMap = ProtobufRouterMap{
 		},
 	},
 	"/uptime": {http.MethodPost: Uptime},
+	"/userver": {
+		http.MethodGet:  RetrieveUservers,
+		http.MethodPost: AddUserver,
+	},
+	"/userver/{id}": {
+		http.MethodGet:    RetrieveUserver,
+		http.MethodDelete: DeleteUserver,
+	},
 }
 
 var jsonRouterMap = JSONRouterMap{
