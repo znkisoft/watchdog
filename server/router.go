@@ -11,10 +11,10 @@ import (
 
 type httpMethod string
 
-type ProtoRouterMap map[string]map[httpMethod]ProtoHandlerFunc
+type ProtobufRouterMap map[string]map[httpMethod]ProtoHandlerFunc
 type JSONRouterMap map[string]map[httpMethod]JSONHandlerFunc
 
-var protoRouterMap = ProtoRouterMap{
+var pbRouterMap = ProtobufRouterMap{
 	"/health": {
 		http.MethodGet: func(w http.ResponseWriter, r *http.Request) (proto.Message, error) {
 			p := &watchdog.Ping{Message: "watchdog service is fine."}
@@ -41,13 +41,13 @@ func NewRouter(mws []mux.MiddlewareFunc) *mux.Router {
 	api.Use(mws...)
 
 	// AMEND: better way to handle different types of routes
-	protoRouters := make([]string, 0, len(protoRouterMap))
-	for k := range protoRouterMap {
+	protoRouters := make([]string, 0, len(pbRouterMap))
+	for k := range pbRouterMap {
 		protoRouters = append(protoRouters, k)
 	}
 	sort.Strings(protoRouters)
 	for _, pt := range protoRouters {
-		hs := protoRouterMap[pt]
+		hs := pbRouterMap[pt]
 		for m, hm := range hs {
 			api.Path(pt).Methods(string(m)).Handler(hm)
 		}
