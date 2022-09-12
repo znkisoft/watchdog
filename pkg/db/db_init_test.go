@@ -31,7 +31,8 @@ func TestCreateDB(t *testing.T) {
 				[]proto.Message{
 					&schema.Userver{
 						Id:            "",
-						Name:          "",
+						Hostname:      "",
+						Alias:         "",
 						Ip:            "",
 						Port:          "",
 						Protocol:      "",
@@ -39,7 +40,8 @@ func TestCreateDB(t *testing.T) {
 						Timeout:       0,
 					}, &schema.Userver{
 						Id:            "",
-						Name:          "",
+						Hostname:      "",
+						Alias:         "",
 						Ip:            "",
 						Port:          "",
 						Protocol:      "",
@@ -48,7 +50,7 @@ func TestCreateDB(t *testing.T) {
 					},
 				},
 			},
-			"CREATE TABLE IF NOT EXISTS userver ( id TEXT PRIMARY KEY, name TEXT, ip TEXT, port TEXT, protocol TEXT, check_interval INTEGER, timeout INTEGER);\nCREATE TABLE IF NOT EXISTS userver ( id TEXT PRIMARY KEY, name TEXT, ip TEXT, port TEXT, protocol TEXT, check_interval INTEGER, timeout INTEGER);\n",
+			"CREATE TABLE IF NOT EXISTS userver ( id TEXT PRIMARY KEY, hostname TEXT, alias TEXT, ip TEXT, port TEXT, protocol TEXT, check_interval INTEGER, timeout INTEGER);\nCREATE TABLE IF NOT EXISTS userver ( id TEXT PRIMARY KEY, hostname TEXT, alias TEXT, ip TEXT, port TEXT, protocol TEXT, check_interval INTEGER, timeout INTEGER);\n",
 		},
 	}
 	for _, tt := range tests {
