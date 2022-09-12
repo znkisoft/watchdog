@@ -12,7 +12,10 @@ import (
 const fileName = "watchdog.schema.sql"
 
 func main() {
-	targetDir := os.Args[1]
+	targetDir := "."
+	if len(os.Args) > 1 {
+		targetDir = os.Args[1]
+	}
 	fs := filepath.Join(targetDir, fileName)
 	if _, err := os.Stat(fs); err == nil || os.IsExist(err) {
 		return

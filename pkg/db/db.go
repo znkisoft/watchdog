@@ -14,6 +14,7 @@ var db *sql.DB
 const dbEnv = "DB_FILE"
 
 func init() {
+	// TODO close this
 	dbfile := os.Getenv(dbEnv)
 	if dbfile == "" {
 		log.Printf("DB_FILE environment variable not set, using default db file")
