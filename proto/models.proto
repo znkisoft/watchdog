@@ -33,6 +33,10 @@ message UptimeInfo {
   int32 seconds = 1;
 }
 
+message Id{
+  string uid = 1;
+}
+
 message SysTimeInfo {
   google.protobuf.Timestamp time = 1;
 }
