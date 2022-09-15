@@ -26,6 +26,10 @@ func RetrieveUservers(_ http.ResponseWriter, r *http.Request) (proto.Message, er
 	// TODO better way to get queries
 	skip, _ := strconv.Atoi(r.URL.Query().Get("skip"))
 	limit, _ := strconv.Atoi(r.URL.Query().Get("limit"))
+	if skip < 0 || limit < 1 {
+		return nil, BadRequest("skip and limit params are invalid")
+	}
+
 	req := &schema.Pagination{
 		Skip:  int32(skip),
 		Limit: int32(limit),

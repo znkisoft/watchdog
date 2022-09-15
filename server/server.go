@@ -29,6 +29,7 @@ const (
 
 func (s *Server) Start(ctx context.Context) error {
 	routers := NewRouter([]mux.MiddlewareFunc{
+		CorsMiddleware,
 		RequestLogMiddleware,
 		ContextMiddleware,
 	})
