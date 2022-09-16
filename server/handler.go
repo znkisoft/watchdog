@@ -46,7 +46,10 @@ func (fn ProtoHandlerFunc) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// w.Header().Set(HeaderContentType, MimeApplicationXProtobuf)
 	w.Header().Set(HeaderContentType, MimeApplicationJSON)
 
-	jsonBytes, err := protojson.Marshal(m)
+	jsonBytes, err := protojson.MarshalOptions{
+		UseProtoNames:   true,
+		EmitUnpopulated: true,
+	}.Marshal(m)
 	// protoBytes, err := proto.Marshal(m)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

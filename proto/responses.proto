@@ -29,4 +29,5 @@ message PluginListResponse {
 
 message UserverResponse {
   repeated Userver uservers = 1;
+  int32 count = 2;
 }
