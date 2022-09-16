@@ -7,6 +7,7 @@ import (
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
+// TODO https://linear.app/znki/issue/ZNK-18/improve-mapping-from-protobuf-to-database-model
 func CreateDBQuery(schemas []proto.Message) string {
 	if schemas == nil || len(schemas) == 0 {
 		return ""
