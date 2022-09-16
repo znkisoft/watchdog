@@ -5,7 +5,7 @@ import (
 	"sort"
 
 	"github.com/gorilla/mux"
-	watchdog "github.com/znkisoft/watchdog/schema"
+	"github.com/znkisoft/watchdog/schema"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -17,7 +17,7 @@ type JSONRouterMap map[string]map[httpMethod]JSONHandlerFunc
 var pbRouterMap = ProtobufRouterMap{
 	"/health": {
 		http.MethodGet: func(w http.ResponseWriter, r *http.Request) (proto.Message, error) {
-			p := &watchdog.Ping{Message: "watchdog service is fine."}
+			p := &schema.UptimeInfo{}
 			return p, nil
 		},
 	},

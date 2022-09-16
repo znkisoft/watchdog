@@ -6,6 +6,6 @@ protoc \
   --go_opt=paths=source_relative \
   proto/*.proto
 
-sleep 5
+sleep 3
 
 go run cmd/db/main.go

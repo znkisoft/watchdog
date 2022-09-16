@@ -36,7 +36,7 @@ func (m *UserverModel) HasId() bool {
 }
 
 func (m *UserverModel) Save() error {
-	stm, err := m.db.Prepare("insert into userver (id, hostname, ip, alias, port, protocol, check_interval, timeout) values (?,?,?,?,?,?,?,?);")
+	stm, err := m.db.Prepare("insert into userver (id, hostname, alias, ip, port, protocol, check_interval, timeout) values (?,?,?,?,?,?,?,?);")
 	if err != nil {
 		log.Println(err)
 		return err
@@ -44,7 +44,7 @@ func (m *UserverModel) Save() error {
 	defer stm.Close()
 
 	id := uuid.NewString()
-	if _, err = stm.Exec(id, m.schema.Hostname, m.schema.Ip, m.schema.Alias, m.schema.Port, m.schema.Protocol, m.schema.CheckInterval, m.schema.Timeout); err != nil {
+	if _, err = stm.Exec(id, m.schema.Hostname, m.schema.Alias, m.schema.Ip, m.schema.Port, m.schema.Protocol, m.schema.CheckInterval, m.schema.Timeout); err != nil {
 		log.Println(err)
 		return err
 	}
@@ -82,7 +82,7 @@ func (m *UserverModel) Delete(id string) error {
 }
 
 func (m *UserverModel) Get(p *schema.Pagination) ([]*schema.Userver, error) {
-	stm, err := m.db.Prepare("select id, name, ip, port, protocol, check_interval, timeout from userver limit ? offset ?;")
+	stm, err := m.db.Prepare("select id, hostname, alias, ip, port, protocol, check_interval, timeout from userver limit ? offset ?;")
 	if err != nil {
 		log.Println(err)
 		return nil, err
@@ -102,7 +102,7 @@ func (m *UserverModel) Get(p *schema.Pagination) ([]*schema.Userver, error) {
 			hostname      string
 			alias         string
 			ip            string
-			port          string
+			port          int32
 			protocol      string
 			checkInterval int32
 			timeout       int32
