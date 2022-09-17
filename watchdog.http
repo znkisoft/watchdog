@@ -22,3 +22,7 @@ GET {{baseURL}}/api/userver?limit=50&skip=0
 # @name delete userver by id
 DELETE {{baseURL}}/api/userver/6580f91f-37ee-4402-8f8e-706e78afd5bc
 
+
+####
+# @name uptime
+POST {{baseURL}}/api/uptime

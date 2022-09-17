@@ -10,11 +10,29 @@ type Monitor struct {
 	// TODO for consistently monitor
 }
 
+type UnitMap map[string]string
+
+var unitMap = UnitMap{
+	"percent":  "float",
+	"percents": "float",
+	"number":   "int",
+	"numbers":  "int",
+	"int":      "int",
+	"ints":     "int",
+	"float":    "float",
+	"floats":   "float",
+	"second":   "int",
+	"seconds":  "int",
+	"byte":     "int",
+	"bytes":    "int",
+}
+
 // Plugin is the general struct for all plugins
 // it included the name, unit, config, status, output
 type Plugin struct {
-	Type schema.PluginType
-	Unit string // TODO define unit type and unit number
+	Type   schema.PluginType
+	Unit   string
+	Enable bool
 }
 
 func RegisterMonitor() *Monitor {
