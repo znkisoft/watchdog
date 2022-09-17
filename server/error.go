@@ -19,44 +19,44 @@ func (e Err) Error() string {
 }
 
 // BadRequest indicates client specified an invalid argument.
-func BadRequest(format string, a ...interface{}) error {
+func BadRequest(format string, a ...any) error {
 	return status.Errorf(codes.InvalidArgument, format, a...)
 }
 
 // NotFound means some requested entity (e.g., file or directory) was
 // not found.
-func NotFound(format string, a ...interface{}) error {
+func NotFound(format string, a ...any) error {
 	return status.Errorf(codes.NotFound, format, a...)
 }
 
 // AlreadyExists means an attempt to create an entity failed because one
 // already exists.
-func AlreadyExists(format string, a ...interface{}) error {
+func AlreadyExists(format string, a ...any) error {
 	return status.Errorf(codes.AlreadyExists, format, a...)
 }
 
 // PermissionDenied indicates the caller does not have permission to
 // execute the specified operation.
-func PermissionDenied(format string, a ...interface{}) error {
+func PermissionDenied(format string, a ...any) error {
 	return status.Errorf(codes.PermissionDenied, format, a...)
 }
 
 // Aborted indicates the operation was aborted, typically due to a
 // concurrency issue like sequencer check failures, transaction aborts, etc.
-func Aborted(format string, a ...interface{}) error {
+func Aborted(format string, a ...any) error {
 	return status.Errorf(codes.Aborted, format, a...)
 }
 
 // OutOfRange means operation was attempted past the valid range.
 // E.g., seeking or reading past end of file.
-func OutOfRange(format string, a ...interface{}) error {
+func OutOfRange(format string, a ...any) error {
 	return status.Errorf(codes.OutOfRange, format, a...)
 }
 
 // Internal errors. Means some invariants expected by underlying
 // system has been broken. If you see one of these errors,
 // something is very broken.
-func Internal(format string, a ...interface{}) error {
+func Internal(format string, a ...any) error {
 	return status.Errorf(codes.Internal, format, a...)
 }
 
