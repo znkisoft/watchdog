@@ -38,8 +38,9 @@ type Plugin struct {
 func RegisterMonitor() *Monitor {
 	m := make(map[string]*Plugin, len(schema.PluginType_name))
 
-	m[schema.PluginType_CPU.String()] = registerPlugin(schema.PluginType_CPU, "")
-	m[schema.PluginType_UPTIME.String()] = registerPlugin(schema.PluginType_UPTIME, "")
+	for i, name := range schema.PluginType_name {
+		m[name] = registerPlugin(schema.PluginType(i), "")
+	}
 
 	return &Monitor{
 		Plugins: m,

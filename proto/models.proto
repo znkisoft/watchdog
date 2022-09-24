@@ -12,6 +12,7 @@ enum PluginType {
   DISK = 4;
   NETWORK = 5;
   SYS_TIME = 6;
+  Docker = 7;
 }
 
 message Ping {

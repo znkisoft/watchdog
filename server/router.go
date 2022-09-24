@@ -5,7 +5,7 @@ import (
 	"sort"
 
 	"github.com/gorilla/mux"
-	watchdog "github.com/znkisoft/watchdog/schema"
+	"github.com/znkisoft/watchdog/schema"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -14,34 +14,31 @@ type httpMethod string
 type ProtobufRouterMap map[string]map[httpMethod]ProtoHandlerFunc
 type JSONRouterMap map[string]map[httpMethod]JSONHandlerFunc
 
-var pbRouterMap = ProtobufRouterMap{
-	"/health": {
-		http.MethodGet: func(w http.ResponseWriter, r *http.Request) (proto.Message, error) {
-			p := &watchdog.Ping{Message: "watchdog service is fine."}
-			return p, nil
-		},
-	},
-	"/uptime": {http.MethodPost: Uptime},
-	"/userver": {
-		http.MethodGet:  RetrieveUservers,
-		http.MethodPost: AddUserver,
-	},
-	"/userver/{id}": {
-		http.MethodGet:    RetrieveUserver,
-		http.MethodDelete: DeleteUserver,
-	},
-}
-
-var jsonRouterMap = JSONRouterMap{
-	"/docker/containers":              {http.MethodGet: ContainerList},
-	"/docker/containers/{id}/create":  {http.MethodPost: ContainerCreate},
-	"/docker/containers/{id}/stop":    {http.MethodPost: ContainerStop},
-	"/docker/containers/{id}/restart": {http.MethodPost: ContainerRestart},
-	"/docker/containers/{id}/kill":    {http.MethodPost: ContainerKill},
-	"/docker/containers/{id}/remove":  {http.MethodDelete: ContainerRemove},
-}
-
 func NewRouter(mws []mux.MiddlewareFunc) *mux.Router {
+	dockerTransport, _ := NewTransport()
+
+	var pbRouterMap = ProtobufRouterMap{
+		"/health": {
+			http.MethodGet: func(w http.ResponseWriter, r *http.Request) (proto.Message, error) {
+				p := &schema.UptimeInfo{}
+				return p, nil
+			},
+		},
+		"/uptime": {http.MethodPost: Uptime},
+		"/userver": {
+			http.MethodGet:  RetrieveUservers,
+			http.MethodPost: AddUserver,
+		},
+		"/userver/{id}": {
+			http.MethodGet:    RetrieveUserver,
+			http.MethodDelete: DeleteUserver,
+		},
+	}
+
+	var jsonRouterMap = JSONRouterMap{
+		"/docker/containers/{params}": {http.MethodGet: dockerTransport.ContainerProxy},
+	}
+
 	r := mux.NewRouter()
 	api := r.PathPrefix("/api").Subrouter()
 
