@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"os"
 	"path/filepath"
 
@@ -18,6 +19,7 @@ func main() {
 	}
 	fs := filepath.Join(targetDir, fileName)
 	if _, err := os.Stat(fs); err == nil || os.IsExist(err) {
+		log.Printf("file %s already exists", fs)
 		return
 	}
 
